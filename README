@@ -1,0 +1,43 @@
+The repository is made for Grofers Coding Challenge.
+
+It is divided into two parts:
+
+A) Local Tail:
+
+    A simple program to emulate the functionality of tail command. The code is well comemnted and is logically simplest flow for the simulating tail.
+
+    Addtional Information:
+        NLOC:12
+        Complexity: 4
+
+B) Remote Tail:
+
+    A program that has the capability to remotely tail files. Initially I had writtten code in flask with polling from front end in jquery/javascript every 300ms
+    using XHTTP. However I believed that system was not a good way of tailing files. So I have written a codebase using a PubSub technology (pusher).
+
+    The program has 3 componets:
+
+    1) Agent: This agent is identical to the local-tail program. However instead of forwarding the logs to STDOUT, it sends the log to the pusher server.
+
+    2) Web UI: A simplistic webpage that subscribes a channel and event from Pusher servers. Any log that is forwarded by my agent is recived by the UI
+    using publish subscribe method. no no waste HTTP calls are made in polling.
+
+    3) CLI: A cli to view the logs remotely over terminal in absensce of the ability to run a web ui.
+
+
+    Advantages of this method over flask:
+        If any other was used, we needed to setup the connection between the remote machine and current machine that would have required the knowledge of IPs,
+        as well as requriemtn of static IPs and the entire solution being dependent on both machines being in the common intranet or having public IP for any one
+        of the machines. This approach however allows one to view the logs from any location as broker service pusher is global in nature.
+
+    Addtional Information:
+        NLOC:12
+        Complexity: 4
+
+
+SETUP INSTRUCTIONS:
+
+The system uses python standard libraries except for two:
+
+    1) Pusher Library: The server side library for pusher.
+    2) Pysher Library: The client side library for pusher.

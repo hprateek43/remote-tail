@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+  <title>Pusher Test</title>
+  <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('0f38f1644efd1f057d43', {
+      cluster: 'ap2',
+      forceTLS: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      document.getElementById('logs').innerHTML += data['message'].replace(/\n/g, "<br />");+"<br/>";
+    });
+  </script>
+</head>
+<body>
+  <h1>Realtime Logs</h1>
+  <p>
+    This code demonstrates realtime remote logging with help of <code>Pusher</code>.
+  </p>
+
+  <div id="logs"></div>
+
+</body>
